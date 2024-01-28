@@ -30,7 +30,7 @@ var tasks = allTasks{
 }
 
 func indexRoute(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintf(w, "Welcome to api")
+	fmt.Fprintf(w, "Welcome to api v1")
 }
 
 func main() {
