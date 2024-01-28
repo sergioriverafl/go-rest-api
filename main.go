@@ -1,6 +1,7 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
 	"log"
 	"net/http"
@@ -29,6 +30,10 @@ var tasks = allTasks{
 	},
 }
 
+func getTasks(w http.ResponseWriter, r *http.Request) {
+	json.NewEncoder(w).Encode(tasks)
+}
+
 func indexRoute(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintf(w, "Welcome to api v1")
 }
@@ -36,5 +41,6 @@ func indexRoute(w http.ResponseWriter, r *http.Request) {
 func main() {
 	router := mux.NewRouter().StrictSlash(true)
 	router.HandleFunc("/", indexRoute)
-	log.Fatal(http.ListenAndServe(":20000", router))
+	router.HandleFunc("/tasks", getTasks)
+	log.Fatal(http.ListenAndServe(":65535", router))
 }
