@@ -9,7 +9,7 @@ import (
 	"github.com/sergioriverafl/go-rest-api/handlers"
 )
 
-func indexRoute(w http.ResponseWriter, r *http.Request) {
+func main() {
 	router := mux.NewRouter().StrictSlash(true)
 
 	// Index Routes
@@ -22,6 +22,6 @@ func indexRoute(w http.ResponseWriter, r *http.Request) {
 	router.HandleFunc("/tasks/{id}", handlers.DeleteTask).Methods("DELETE")
 	router.HandleFunc("/tasks/{id}", handlers.UpdateTask).Methods("PUT")
 
-	fmt.Println("Server started on port ", 3000)
-	log.Fatal(http.ListenAndServe(":3000", router))
+	fmt.Println("Server started on port ", 65535)
+	log.Fatal(http.ListenAndServe(":65535", router))
 }
