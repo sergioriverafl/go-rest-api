@@ -78,6 +78,20 @@ func getTask(w http.ResponseWriter, r *http.Request) {
 }
 
 func deleteTask(w http.ResponseWriter, r *http.Request) {
+	vars := mux.Vars(r)
+	taskID, err := strconv.Atoi(vars["id"])
+
+	if err != nil {
+		fmt.Fprintf(w, "Invalid ID")
+	}
+
+	for i, task := range tasks {
+		if task.ID == taskID {
+			tasks = append(tasks[:i], tasks[i+1:]...)
+			w.WriteHeader(http.StatusAccepted)
+			fmt.Fprintf(w, "The task witch ID %v has been remove successfully", taskID)
+		}
+	}
 
 }
 
